@@ -1,7 +1,7 @@
 from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
-    APP_NAME: str = "AI Memory System"
+    APP_NAME: str = "Memgent"
     ENV: str = "dev"
 
     VECTOR_DB_PATH: str = "data/memory_index"

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memgent</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="brand">
+                <i data-lucide="brain-circuit"></i>
+                <span>Memgent</span>
+            </div>
+
+            <div class="task-info">
+                <label>Current Task ID</label>
+                <div class="input-group">
+                    <input type="text" id="task-id" value="task-001" readonly>
+                    <button onclick="generateNewTask()" title="New Task"><i data-lucide="plus"></i></button>
+                </div>
+            </div>
+
+            <nav>
+                <div id="history-list" class="history-list">
+                    <!-- History items injected here -->
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="chat-interface">
+            <header>
+                <div class="header-info">
+                    <h2>Agent Workspace</h2>
+                    <span class="status-badge">Online</span>
+                </div>
+            </header>
+
+            <div class="chat-history" id="chat-log">
+                <!-- Messages will appear here -->
+                <div class="message system">
+                    <div class="avatar"><i data-lucide="bot"></i></div>
+                    <div class="content">
+                        <p>Hello! I am your AI Memory Agent. I can manage long scheduling workflows and remember past
+                            context. How can I help?</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-area">
+                <div class="input-wrapper">
+                    <textarea id="user-input" placeholder="Type a message or 'resume'..." rows="1"
+                        oninput="autoResize(this)"></textarea>
+                    <button id="send-btn"><i data-lucide="send"></i></button>
+                </div>
+                <div class="hint">Press Enter to send, Shift+Enter for new line</div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

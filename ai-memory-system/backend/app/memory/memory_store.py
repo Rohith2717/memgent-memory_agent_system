@@ -2,6 +2,7 @@ import faiss
 import os
 import shutil
 import pickle
+import uuid
 import numpy as np
 from app.memory.embeddings import embed
 from app.core.config import settings
@@ -27,11 +28,15 @@ class MemoryStore:
     def add(self, task_id: str, content: str, metadata: dict):
         vec = np.array([embed(content)], dtype="float32")
         self.index.add(vec)
+        
+        mem_id = metadata.get("id") or str(uuid.uuid4())
+        
         self.metadata.append({
+            "id": mem_id,
             "task_id": task_id,
             "content": content,
             "metadata": metadata,
-            "score": 0
+            "score": 0.0 # Initial score
         })
         self._persist()
 
@@ -51,6 +56,15 @@ class MemoryStore:
 
 
     def _persist(self):
+        if not os.path.exists(settings.VECTOR_DB_PATH):
+            os.makedirs(settings.VECTOR_DB_PATH)
+            
         faiss.write_index(self.index, self.index_path)
         with open(self.meta_path, "wb") as f:
             pickle.dump(self.metadata, f)
+
+    def get_all_task_ids(self) -> list[str]:
+        return list(set(m["task_id"] for m in self.metadata))
+
+    def get_memories(self, task_id: str) -> list[dict]:
+        return [m for m in self.metadata if m["task_id"] == task_id]
