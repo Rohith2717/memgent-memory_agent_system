@@ -1,4 +1,4 @@
-# AI Memory System
+# AI Agent Memory System
 
 ## Overview
 A sophisticated memory system for AI agents, featuring reinforcement learning (RL) optimized retrieval, session management, and long-term memory storage. This system allows agents to store user interactions, retrieve relevant context, and learn from feedback to improve memory ranking over time.
@@ -80,3 +80,4 @@ ai-memory-system/
     ├── script.js
     └── style.css
 ```
+
